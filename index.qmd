@@ -21,7 +21,9 @@ x <- get_decennial(geography = "county",
 ```{r}
 #| message: false
 #| warning: false
-summary(x)
+x |>
+  ggplot(aes(x = med_age_male, y = med_age_female)) +
+  geom_point()
 ```
 
 
