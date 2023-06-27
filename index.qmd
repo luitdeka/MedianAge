@@ -9,6 +9,7 @@ execute:
 #| warning: false
 library(tidyverse)
 library(tidycensus)
+library(ggthemes)
 x <- get_decennial(geography = "county", 
                    variables = c(population = "P001001", 
                                  med_age_male = "P013002", 
@@ -23,7 +24,13 @@ x <- get_decennial(geography = "county",
 #| warning: false
 x |>
   ggplot(aes(x = med_age_male, y = med_age_female)) +
-  geom_point()
+  geom_point(aes(color = population)) +
+  scale_color_continuous(trans = "log10") +
+  labs(
+    title = "Causal Affect of median male age on median female age in US Counties", subtitle = "There is a dirctly proportional relationship between median male age and median female age",
+    x = "Median Male Ages", y = "Median Female Ages",    
+    caption = "US Census") +
+  theme_classic()
 ```
 
 
